@@ -1,16 +1,16 @@
 import sys
 
-from PyQt6 import uic
 from PyQt6.QtCore import QRectF
 from PyQt6.QtGui import QPainter, QColor
 from PyQt6.QtWidgets import QMainWindow, QApplication
 from random import randint
+from ui import Ui_MainWindow
 
 
-class Example(QMainWindow):
+class Example(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi('UI.ui', self)
+        self.setupUi(self)
         self.pushButton.clicked.connect(self.paint)
         self.do_paint = True
 
@@ -27,9 +27,9 @@ class Example(QMainWindow):
         self.update()
 
     def draw_ellipse(self, qp):
-        qp.setBrush(QColor(255, 255, 0))
-        x1, y1 = randint(0, 700), randint(0, 700)
-        step = randint(10, 300)
+        qp.setBrush(QColor(randint(0, 255), randint(0, 255), randint(0, 255)))
+        x1, y1 = randint(0, 800), randint(0, 800)
+        step = randint(100, 500)
         rectangle = QRectF(x1, y1, step, step)
         qp.drawEllipse(rectangle)
 
